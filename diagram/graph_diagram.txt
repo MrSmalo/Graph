@@ -1,0 +1,69 @@
+@startuml
+' PlantUML class diagram for Graph project
+
+package components {
+  interface Graph<T> {
+    +void addVertex(T)
+    +void removeVertex(T)
+    +void addEdge(T, T)
+    +void removeEdge(T, T)
+    +Integer getWeight(T, T)
+    +boolean hasEdge(T, T)
+    +boolean hasVertex(T)
+    +void printGraph()
+  }
+
+  abstract class AbstractGraph<T> {
+    - Map<Vertex<T>, List<Vertex<T>>> adjVertices
+    - WeightStrategy<T> weightStrategy
+    +AbstractGraph(WeightStrategy<T>)
+    +void addVertex(T)
+    +void removeVertex(T)
+    +abstract void addEdge(T, T)
+    +abstract void removeEdge(T, T)
+    +Integer getWeight(T, T)
+    +boolean hasEdge(T, T)
+    +boolean hasVertex(T)
+    +void printGraph()
+  }
+
+  class DirectedGraph<T> {
+    +void addEdge(T, T)
+    +void removeEdge(T, T)
+  }
+
+  class NonDirectedGraph<T> {
+    +void addEdge(T, T)
+    +void removeEdge(T, T)
+  }
+
+  class Vertex<T> {
+    - T label
+    +Vertex(T)
+    +T getLabel()
+    +void printVertex()
+    +boolean equals(Object)
+    +int hashCode()
+  }
+}
+
+package weightStrategies {
+  interface WeightStrategy<T> {
+    +Integer getWeight(T, T)
+  }
+
+  class RandomStrategy<T> {
+    +Integer getWeight(T, T)
+  }
+}
+
+' Relationships
+Graph <|.. AbstractGraph
+AbstractGraph <|-- DirectedGraph
+AbstractGraph <|-- NonDirectedGraph
+AbstractGraph o-- "1" WeightStrategy : uses
+AbstractGraph *-- "many" Vertex : adjVertices
+Vertex ..> T : generic
+WeightStrategy ..> T : generic
+
+@enduml

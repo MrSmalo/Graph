@@ -1,0 +1,2 @@
+module NewGraph {
+}
