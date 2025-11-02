@@ -29,7 +29,7 @@ public abstract class AbstractGraph<T> implements Graph<T> {
 		adjVertices.values().stream().forEach(e-> e.remove(v));
 		adjVertices.remove(new Vertex<T>(label));		
 	}
-	
+	//dd
 	@Override
 	public void printGraph() {
 		adjVertices.forEach((e,n)->{
