@@ -1,10 +1,11 @@
-package components;
+package graphs;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import vertices.Vertex;
 import weightStrategies.WeightStrategy;
 
 public abstract class AbstractGraph<T> implements Graph<T> {
@@ -20,7 +21,7 @@ public abstract class AbstractGraph<T> implements Graph<T> {
 	
 	@Override
 	public void addVertex(T label) {
-		adjVertices.putIfAbsent(new Vertex<T>(label), new LinkedList<Vertex<T>>());
+		adjVertices.putIfAbsent(new Vertex<>(label), new LinkedList<>());
 	}
 
 	@Override
@@ -29,6 +30,17 @@ public abstract class AbstractGraph<T> implements Graph<T> {
 		adjVertices.values().stream().forEach(e-> e.remove(v));
 		adjVertices.remove(new Vertex<T>(label));		
 	}
+	
+	public Map<Vertex<T>,List<Vertex<T>>> getAdjList(){
+		return adjVertices; 
+	}
+	
+	@Override
+	public List<Vertex<T>> getNeighbor(T label) {
+		Vertex<T> v = new Vertex<>(label);
+ 		return adjVertices.get(v);
+	}
+	
 	@Override
 	public void printGraph() {
 		adjVertices.forEach((e,n)->{
