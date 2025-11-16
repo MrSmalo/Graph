@@ -1,14 +1,20 @@
 package test;
 
-import components.DirectedGraph;
-import components.Graph;
-import components.NonDirectedGraph;
+import vertices.Vertex;
 import weightStrategies.RandomStrategy;
+
+import java.util.LinkedList;
+import java.util.List;
+
+import algorithms.GraphSearch;
+import graphs.DirectedGraph;
+import graphs.Graph;
+import graphs.NonDirectedGraph;
 
 public class Test {
 
 	public static void main(String[] args) {
-		Graph<String> graph = new DirectedGraph<>(new RandomStrategy<>());
+		Graph<String> graph = new NonDirectedGraph<>(new RandomStrategy<>());
 		graph.addVertex("Bob");
 	    graph.addVertex("Alice");
 	    graph.addVertex("Mark");
@@ -21,12 +27,7 @@ public class Test {
 	    graph.addEdge("Rob", "Mark");
 	    graph.addEdge("Alice", "Maria");
 	    graph.addEdge("Rob", "Maria");
-	    System.out.println(graph.getWeight("Bob", "Alice"));
-	    System.out.println(graph.getWeight("Rob", "Mark"));
-	    System.out.println(graph.getWeight("Alice", "Rob"));
-	    System.out.println(graph.getWeight("Alice", "Bob"));
-	    System.out.println(graph.getWeight("Jack", "Rob"));
-	    graph.printGraph();
+	    
 	}
 
 }

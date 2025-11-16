@@ -1,13 +1,17 @@
-package components;
+package vertices;
 
 import java.util.Objects;
 
 public class Vertex<T> {
-	private T label;
+	private final T label;
 	
 	//Create a Vertex with a given label.
 	public Vertex(T label) {
 		this.label = label;
+	}
+	
+	public T getLabel() {
+		return label;
 	}
 
 	@Override
