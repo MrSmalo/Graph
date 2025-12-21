@@ -3,12 +3,13 @@ package test;
 import components.DirectedGraph;
 import components.Graph;
 import components.NonDirectedGraph;
+import factory.BasicVertexFactory;
 import weightStrategies.RandomStrategy;
 
 public class Test {
 
 	public static void main(String[] args) {
-		Graph<String> graph = new DirectedGraph<>(new RandomStrategy<>());
+		Graph<String> graph = new DirectedGraph<>(new RandomStrategy<>(),new BasicVertexFactory<>());
 		graph.addVertex("Bob");
 	    graph.addVertex("Alice");
 	    graph.addVertex("Mark");

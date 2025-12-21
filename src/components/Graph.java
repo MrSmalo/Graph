@@ -1,22 +1,71 @@
 package components;
 
+/**
+ * Interface for a Graph data structure.
+ * 
+ * @param <T> the type of labels for the vertices
+ */
 public interface Graph<T> {
 	
-		//Create a Vertex and add it to a Graph.
-		void addVertex(T label);
-		//Removes Vertex and all of its in and out Edges.
-		void removeVertex(T label);
-		//Connect between 2 Vertices by an Edge.
-		void addEdge(T label1,T label2);
-		//Removes an Edge between 2 Vertices.
-		void removeEdge(T label1,T label2);
-		//Prints a graph as vertex -> edge1 edge2 ...
-		public void printGraph();
-		//Get an edge weight
-		public Integer getWeight(T label1, T label2);
-		//Check whether an edge exists between two vertices
-		public boolean hasEdge(T label1, T label2);
-		//Check whether an vertex exists
-		public boolean hasVertex(T label);
+	/**
+	 * Creates a vertex with the given label and adds it to the graph.
+	 * 
+	 * @param label the label of the vertex to add
+	 */
+	void addVertex(T label);
+
+	/**
+	 * Removes the vertex with the given label and all its associated edges.
+	 * 
+	 * @param label the label of the vertex to remove
+	 */
+	void removeVertex(T label);
+
+	/**
+	 * Connects two vertices with an edge.
+	 * 
+	 * @param label1 the label of the source vertex
+	 * @param label2 the label of the destination vertex
+	 */
+	void addEdge(T label1, T label2);
+
+	/**
+	 * Removes the edge between two vertices.
+	 * 
+	 * @param label1 the label of the source vertex
+	 * @param label2 the label of the destination vertex
+	 */
+	void removeEdge(T label1, T label2);
+
+	/**
+	 * Prints the graph structure (adjacency list) to the standard output.
+	 */
+	public void printGraph();
+
+	/**
+	 * Gets the weight of the edge between two vertices.
+	 * 
+	 * @param label1 the label of the source vertex
+	 * @param label2 the label of the destination vertex
+	 * @return the weight of the edge, or null if no weight is defined or edge doesn't exist
+	 */
+	public Integer getWeight(T label1, T label2);
+
+	/**
+	 * Checks if an edge exists between two vertices.
+	 * 
+	 * @param label1 the label of the source vertex
+	 * @param label2 the label of the destination vertex
+	 * @return true if the edge exists, false otherwise
+	 */
+	public boolean hasEdge(T label1, T label2);
+
+	/**
+	 * Checks if a vertex with the given label exists in the graph.
+	 * 
+	 * @param label the label of the vertex to check
+	 * @return true if the vertex exists, false otherwise
+	 */
+	public boolean hasVertex(T label);
 		
 }
