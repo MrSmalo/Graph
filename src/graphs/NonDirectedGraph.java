@@ -5,8 +5,20 @@ import java.util.List;
 import vertices.Vertex;
 import weightStrategies.WeightStrategy;
 
+/**
+ * Implementation of a non-directed (undirected) graph.
+ * In a non-directed graph, edges do not have a direction; an edge between vertices A and B 
+ * is bidirectional.
+ *
+ * @param <T> the type of the label associated with the vertices in the graph
+ */
 public class NonDirectedGraph<T> extends AbstractGraph<T> {
 	
+	/**
+	 * Constructs a NonDirectedGraph with a specific weight strategy.
+	 *
+	 * @param weightStrategy the weight strategy to be used
+	 */
 	public NonDirectedGraph(WeightStrategy<T> weightStrategy) {
 		super(weightStrategy);
 	}

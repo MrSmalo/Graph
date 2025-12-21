@@ -8,12 +8,28 @@ import java.util.Map;
 import vertices.Vertex;
 import weightStrategies.WeightStrategy;
 
+/**
+ * Provides a skeletal implementation of the {@link Graph} interface to minimize the effort required 
+ * to implement this interface.
+ *
+ * @param <T> the type of the label associated with the vertices in the graph
+ */
 public abstract class AbstractGraph<T> implements Graph<T> {
 	
+	/**
+	 * Map storing the adjacency list where each key is a vertex and each value is a list of its neighbors.
+	 */
 	protected Map <Vertex<T>,List<Vertex<T>>> adjVertices;
+	/**
+	 * Strategy used to manage edge weights within the graph.
+	 */
 	protected WeightStrategy<T> weightStrategy;
 	
-	//Define the kind of strategy we are going to use
+	/**
+	 * Constructs an AbstractGraph with a specific weight strategy.
+	 *
+	 * @param strategy the weight strategy to be used
+	 */
 	public AbstractGraph(WeightStrategy<T> strategy) {
 		adjVertices = new HashMap <>();
 		this.weightStrategy = strategy;

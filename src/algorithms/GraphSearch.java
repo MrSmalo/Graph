@@ -7,12 +7,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
-import graphs.Graph;
-import vertices.BfsVertex;
-import vertices.Vertex;
 
+/**
+ * Utility class providing graph search algorithms.
+ */
 public class GraphSearch {
 	
+	/**
+	 * Performs a Breadth-First Search (BFS) on the given graph starting from the specified value.
+	 *
+	 * @param <T> the type of labels for the vertices
+	 * @param graph the graph to search
+	 * @param startValue the label of the starting vertex
+	 * @return a list of BFSVertex instances in the order they were discovered
+	 */
 	public static <T> List<BfsVertex<T>> bfs(Graph<T> graph,T startValue) {
 		
 		Map<Vertex<T>,BfsVertex<T>> vertices = new HashMap<>(); //change to map from Vertex to SearchVertex

@@ -21,24 +21,24 @@ A flexible and extensible Java library for graph data structures, supporting bot
 
 ## Project Structure
 
-- `components`: Core graph interfaces and implementations.
+- `graphs`: Core graph interfaces and implementations.
 - `vertex`: Vertex interfaces and various specialized vertex classes.
 - `factory`: Factories for creating vertex instances.
 - `weightStrategies`: Strategies for managing edge weights.
+- `algorithms`: Graph search algorithms (e.g., BFS).
 - `test`: Contains a sample `Test` class demonstrating library usage.
 
 ## Usage Example
 
 ```java
-import components.DirectedGraph;
-import components.Graph;
-import factory.BasicVertexFactory;
+import graphs.DirectedGraph;
+import graphs.Graph;
 import weightStrategies.RandomStrategy;
 
 public class Main {
     public static void main(String[] args) {
-        // Create a directed graph with random weights and basic vertices
-        Graph<String> graph = new DirectedGraph<>(new RandomStrategy<>(), new BasicVertexFactory<>());
+        // Create a directed graph with random weights
+        Graph<String> graph = new DirectedGraph<>(new RandomStrategy<>());
 
         // Add vertices
         graph.addVertex("Alice");
@@ -58,7 +58,7 @@ public class Main {
 
 ## Getting Started
 
-1. Import the necessary classes from the `components`, `factory`, and `weightStrategies` packages.
+1. Import the necessary classes from the `graphs`, `factory`, and `weightStrategies` packages.
 2. Choose your desired `WeightStrategy` and `VertexFactory`.
 3. Instantiate a `DirectedGraph` or `NonDirectedGraph`.
 4. Start building your graph!

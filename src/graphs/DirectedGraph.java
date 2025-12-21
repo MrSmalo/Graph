@@ -5,8 +5,19 @@ import java.util.List;
 import vertices.Vertex;
 import weightStrategies.WeightStrategy;
 
+/**
+ * Implementation of a directed graph.
+ * In a directed graph, edges have a direction from a source vertex to a destination vertex.
+ *
+ * @param <T> the type of the label associated with the vertices in the graph
+ */
 public class DirectedGraph<T> extends AbstractGraph<T>{
 
+	/**
+	 * Constructs a DirectedGraph with a specific weight strategy.
+	 *
+	 * @param strategy the weight strategy to be used
+	 */
 	public DirectedGraph(WeightStrategy<T> strategy) {
 		super(strategy);
 	}
