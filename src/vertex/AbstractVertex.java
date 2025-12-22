@@ -37,7 +37,6 @@ public abstract class AbstractVertex<T> implements Vertex<T> {
 	@Override
 	public void printVertex() {
 		System.out.print(this.label);
-		
 	}
 	
 	@Override

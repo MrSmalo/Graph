@@ -1,5 +1,7 @@
 package weightStrategies;
 
+import vertex.Vertex;
+
 /**
  * Strategy interface for managing edge weights in a graph.
  * 
@@ -10,35 +12,40 @@ public interface WeightStrategy<T> {
 	/**
 	 * Adds an edge between two vertices with a default weight.
 	 * 
-	 * @param label1 the label of the source vertex
-	 * @param label2 the label of the destination vertex
+	 * @param vertex1 the source vertex
+	 * @param vertex2 the destination vertex
 	 */
-	public void addEdge(T label1, T label2);
+	public void addEdge(Vertex<T> vertex1, Vertex<T> vertex2);
 
 	/**
 	 * Adds an edge between two vertices with a specific weight.
 	 * 
-	 * @param label1 the label of the source vertex
-	 * @param label2 the label of the destination vertex
+	 * @param vertex1 the source vertex
+	 * @param vertex2 the destination vertex
 	 * @param weight the weight to assign to the edge
 	 */
-	public void addEdge(T label1, T label2, Integer weight);
+	public void addEdge(Vertex<T> vertex1, Vertex<T> vertex2, Integer weight);
 
 	/**
 	 * Gets the weight of the edge between two vertices.
 	 * 
-	 * @param label1 the label of the source vertex
-	 * @param label2 the label of the destination vertex
+	 * @param vertex1 the source vertex
+	 * @param vertex2 the destination vertex
 	 * @return the weight of the edge, or null if it doesn't exist
 	 */
-	public Integer getWeight(T label1, T label2);
+	public Integer getWeight(Vertex<T> vertex1, Vertex<T> vertex2);
 
 	/**
 	 * Generates a unique key representation for an edge.
 	 * 
-	 * @param label1 the label of the source vertex
-	 * @param label2 the label of the destination vertex
+	 * @param vertex1 the source vertex
+	 * @param vertex2 the destination vertex
 	 * @return the unique key for the edge
 	 */
-	public String getKey(T label1, T label2);
+	public String getKey(Vertex<T> vertex1, Vertex<T> vertex2);
+
+	/**
+	 * Prints the weights of all edges in the graph to the standard output.
+	 */
+	public void printWeights();
 }

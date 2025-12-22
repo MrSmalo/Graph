@@ -1,9 +1,9 @@
 package graphs;
 
-import java.util.List;
-
-import vertices.Vertex;
+import vertex.Vertex;
 import weightStrategies.WeightStrategy;
+
+import java.util.List;
 
 /**
  * Implementation of a directed graph.
@@ -22,26 +22,30 @@ public class DirectedGraph<T> extends AbstractGraph<T>{
 		super(strategy);
 	}
 
+	/**
+	 * Constructs a DirectedGraph with a specific weight strategy and a list of vertices.
+	 * @param strategy
+	 * @param vertices
+	 */
+	public DirectedGraph(WeightStrategy<T> strategy, List<Vertex<T>> vertices) {super(strategy, vertices);}
+
 	@Override
-	public void addEdge(T label1, T label2) {
+	public void addEdge(Vertex<T> vertex1, Vertex<T> vertex2) {
 		// Ensure vertices exist
-		addVertex(label1);
-		addVertex(label2);
+		addVertex(vertex1);
+		addVertex(vertex2);
 		// Only add if edge does not already exist
-		if (!hasEdge(label1, label2)) {
-			Vertex<T> v1 = new Vertex<>(label1);
-			Vertex<T> v2 = new Vertex<>(label2);
-			adjVertices.get(v1).add(v2);
-			this.weightStrategy.addEdge(label1, label2);
+		// Check for self-loops
+		if (!hasEdge(vertex1, vertex2) && !vertex1.equals(vertex2)) {
+			adjVertices.get(vertex1).add(vertex2);
+			this.weightStrategy.addEdge(vertex1, vertex2);
 		}
 	}
 
 	@Override
-	public void removeEdge(T label1, T label2) {
-		Vertex<T> v1 = new Vertex<T>(label1);
-		Vertex<T> v2 = new Vertex<T>(label2);
-		List<Vertex<T>> eV1 = adjVertices.get(v1);
+	public void removeEdge(Vertex<T> vertex1, Vertex<T> vertex2) {
+		List<Vertex<T>> eV1 = adjVertices.get(vertex1);
 		if(eV1 != null) 
-			eV1.remove(v2);
+			eV1.remove(vertex2);
 	}
 }

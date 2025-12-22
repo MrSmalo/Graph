@@ -1,5 +1,10 @@
 package algorithms;
 
+import graphs.Graph;
+import vertex.Vertex;
+import vertex.BFSVertex;
+import vertex.Color;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -14,45 +19,52 @@ import java.util.Queue;
 public class GraphSearch {
 	
 	/**
-	 * Performs a Breadth-First Search (BFS) on the given graph starting from the specified value.
+	 * Performs a Breadth-First Search (BFS) on the given graph starting from the specified vertex.
 	 *
 	 * @param <T> the type of labels for the vertices
 	 * @param graph the graph to search
-	 * @param startValue the label of the starting vertex
+	 * @param startVertex the starting vertex
 	 * @return a list of BFSVertex instances in the order they were discovered
 	 */
-	public static <T> List<BfsVertex<T>> bfs(Graph<T> graph,T startValue) {
+	public static <T> List<BFSVertex<T>> bfs(Graph<T> graph, Vertex<T> startVertex) {
 		
-		Map<Vertex<T>,BfsVertex<T>> vertices = new HashMap<>(); //change to map from Vertex to SearchVertex
-		List<BfsVertex<T>> searchedGraph = new ArrayList<BfsVertex<T>>();
+		Map<Vertex<T>, BFSVertex<T>> vertices = new HashMap<>(); 
+		List<BFSVertex<T>> searchedGraph = new ArrayList<>();
 		
-		for (Vertex<T> vertice : graph.getAdjList().keySet()) {
-			vertices.put(vertice, new BfsVertex<T>(vertice.getLabel()));
+		for (Vertex<T> vertex : graph.getAdjList().keySet()) {
+			vertices.put(vertex, new BFSVertex<>(vertex.getLabel()));
 		}
 		
 		
-		BfsVertex<T> start = vertices.get(new Vertex<T>(startValue));
-		start.setDistance(0);
-		start.setColor(Colors.Grey);
+		BFSVertex<T> start = vertices.get(startVertex);
+		if (start == null) {
+			return searchedGraph;
+		}
 		
-		Queue<BfsVertex<T>> Q = new LinkedList<>();
+		start.setDistance(0);
+		start.setColor(Color.Grey);
+		
+		Queue<BFSVertex<T>> Q = new LinkedList<>();
 		Q.add(start);
 		
 		while (!Q.isEmpty()) {
 			
-			BfsVertex<T> v = Q.poll();
+			BFSVertex<T> v = Q.poll();
 			
-			for (Vertex<T> neighborVertice : graph.getNeighbor(v.getLabel())) {
-				BfsVertex<T> u = vertices.get(neighborVertice);
-				if (u.getColor() != Colors.White) {
-					continue;
+			List<Vertex<T>> neighbors = graph.getNeighbor(v);
+			if (neighbors != null) {
+				for (Vertex<T> neighborVertex : neighbors) {
+					BFSVertex<T> u = vertices.get(neighborVertex);
+					if (u == null || u.getColor() != Color.White) {
+						continue;
+					}
+					u.setColor(Color.Grey);
+					u.setDistance(v.getDistance() + 1);
+					u.setFrom(v);
+					Q.add(u);
 				}
-				u.setColor(Colors.Grey);
-				u.setDistance(v.getDistance() + 1);
-				u.setFrom(v);
-				Q.add(u);
 			}
-			v.setColor(Colors.Black);
+			v.setColor(Color.Black);
 			searchedGraph.add(v);
 		}
 		return searchedGraph;

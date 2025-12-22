@@ -1,5 +1,7 @@
 package weightStrategies;
 
+import vertex.Vertex;
+
 public class WeightlessStrategy<T> extends AbstractWeightStrategy<T> {
 
 	/**
@@ -10,13 +12,13 @@ public class WeightlessStrategy<T> extends AbstractWeightStrategy<T> {
 	}
 
 	@Override
-	public void addEdge(T label1, T label2) {
-		weightTable.put(getKey(label1,label2),-1);
+	public void addEdge(Vertex<T> vertex1, Vertex<T> vertex2) {
+		weightTable.put(getKey(vertex1, vertex2), -1);
 	}
 
 	@Override
-	public void addEdge(T label1, T label2, Integer weight) {
-		weightTable.put(getKey(label1,label2),weight);
+	public void addEdge(Vertex<T> vertex1, Vertex<T> vertex2, Integer weight) {
+		weightTable.put(getKey(vertex1, vertex2), weight);
 	}
 
 }

@@ -23,7 +23,7 @@ A flexible and extensible Java library for graph data structures, supporting bot
 
 - `graphs`: Core graph interfaces and implementations.
 - `vertex`: Vertex interfaces and various specialized vertex classes.
-- `factory`: Factories for creating vertex instances.
+- `vertex.factory`: Factories for creating vertex instances.
 - `weightStrategies`: Strategies for managing edge weights.
 - `algorithms`: Graph search algorithms (e.g., BFS).
 - `test`: Contains a sample `Test` class demonstrating library usage.
@@ -58,7 +58,7 @@ public class Main {
 
 ## Getting Started
 
-1. Import the necessary classes from the `graphs`, `factory`, and `weightStrategies` packages.
+1. Import the necessary classes from the `graphs`, `vertex.factory`, and `weightStrategies` packages.
 2. Choose your desired `WeightStrategy` and `VertexFactory`.
 3. Instantiate a `DirectedGraph` or `NonDirectedGraph`.
 4. Start building your graph!

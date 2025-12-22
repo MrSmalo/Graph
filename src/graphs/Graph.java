@@ -1,9 +1,9 @@
 package graphs;
 
+import vertex.Vertex;
+
 import java.util.List;
 import java.util.Map;
-
-import vertices.Vertex;
 
 /**
  * Represents a generic graph data structure.
@@ -13,51 +13,58 @@ import vertices.Vertex;
 public interface Graph<T> {
 	
 	/**
-	 * Creates a vertex with the specified label and adds it to the graph.
+	 * Creates a vertex and adds it to the graph.
 	 * If the vertex already exists, no changes are made.
 	 *
-	 * @param label the label of the vertex to add
+	 * @param vertex the vertex to add
 	 */
-	void addVertex(T label);
+	void addVertex(Vertex<T> vertex);
 
 	/**
-	 * Removes the vertex with the specified label and all its associated incoming and outgoing edges.
+	 * Removes the specified vertex and all its associated incoming and outgoing edges.
 	 *
-	 * @param label the label of the vertex to remove
+	 * @param vertex the vertex to remove
 	 */
-	void removeVertex(T label);
+	void removeVertex(Vertex<T> vertex);
 
 	/**
-	 * Adds an edge between two vertices identified by their labels.
-	 * If the vertices do not exist, they are created and added to the graph.
+	 * Adds an edge between two vertices.
+	 * If the vertices do not exist, they are added to the graph.
 	 *
-	 * @param label1 the label of the source vertex (or one end in non-directed graphs)
-	 * @param label2 the label of the destination vertex (or the other end in non-directed graphs)
+	 * @param vertex1 the source vertex (or one end in non-directed graphs)
+	 * @param vertex2 the destination vertex (or the other end in non-directed graphs)
 	 */
-	void addEdge(T label1,T label2);
+	void addEdge(Vertex<T> vertex1, Vertex<T> vertex2);
 
 	/**
-	 * Removes the edge between two vertices identified by their labels.
+	 * Removes the edge between two vertices.
 	 *
-	 * @param label1 the label of the source vertex
-	 * @param label2 the label of the destination vertex
+	 * @param vertex1 the source vertex
+	 * @param vertex2 the destination vertex
 	 */
-	void removeEdge(T label1,T label2);
+	void removeEdge(Vertex<T> vertex1, Vertex<T> vertex2);
 
 	/**
 	 * Returns the adjacency list representation of the graph.
 	 *
 	 * @return a map where each key is a vertex and each value is a list of its neighbors
 	 */
-	public Map <Vertex<T>,List<Vertex<T>>> getAdjList();
+	public Map<Vertex<T>, List<Vertex<T>>> getAdjList();
 
 	/**
-	 * Returns a list of neighbors for the vertex with the specified label.
+	 * Returns the adjacency list size.
 	 *
-	 * @param label the label of the vertex
+	 * @return int the size of the adjacency list
+	 */
+	public int getAdjListSize();
+
+	/**
+	 * Returns a list of neighbors for the specified vertex.
+	 *
+	 * @param vertex the vertex
 	 * @return a list of neighbor vertices
 	 */
-	public List<Vertex<T>> getNeighbor(T label);
+	public List<Vertex<T>> getNeighbor(Vertex<T> vertex);
 
 	/**
 	 * Prints the graph structure to the standard output.
@@ -68,27 +75,27 @@ public interface Graph<T> {
 	/**
 	 * Gets the weight of the edge between two vertices.
 	 *
-	 * @param label1 the label of the source vertex
-	 * @param label2 the label of the destination vertex
+	 * @param vertex1 the source vertex
+	 * @param vertex2 the destination vertex
 	 * @return the weight of the edge, or null if the edge doesn't exist
 	 */
-	public Integer getWeight(T label1, T label2);
+	public Integer getWeight(Vertex<T> vertex1, Vertex<T> vertex2);
 
 	/**
 	 * Checks if an edge exists between two vertices.
 	 *
-	 * @param label1 the label of the source vertex
-	 * @param label2 the label of the destination vertex
+	 * @param vertex1 the source vertex
+	 * @param vertex2 the destination vertex
 	 * @return true if the edge exists, false otherwise
 	 */
-	public boolean hasEdge(T label1, T label2);
+	public boolean hasEdge(Vertex<T> vertex1, Vertex<T> vertex2);
 
 	/**
-	 * Checks if a vertex with the specified label exists in the graph.
+	 * Checks if the specified vertex exists in the graph.
 	 *
-	 * @param label the label of the vertex
+	 * @param vertex the vertex
 	 * @return true if the vertex exists, false otherwise
 	 */
-	public boolean hasVertex(T label);
+	public boolean hasVertex(Vertex<T> vertex);
 		
 }

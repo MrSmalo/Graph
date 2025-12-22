@@ -1,9 +1,9 @@
 package graphs;
 
-import java.util.List;
-
-import vertices.Vertex;
+import vertex.Vertex;
 import weightStrategies.WeightStrategy;
+
+import java.util.List;
 
 /**
  * Implementation of a non-directed (undirected) graph.
@@ -22,33 +22,31 @@ public class NonDirectedGraph<T> extends AbstractGraph<T> {
 	public NonDirectedGraph(WeightStrategy<T> weightStrategy) {
 		super(weightStrategy);
 	}
+	public NonDirectedGraph(WeightStrategy<T> weightStrategy, List<Vertex<T>> vertices) {super(weightStrategy, vertices);}
 	
 	@Override
-	public void addEdge(T label1, T label2) {
+	public void addEdge(Vertex<T> vertex1, Vertex<T> vertex2) {
 		// Ensure vertices exist
-		addVertex(label1);
-		addVertex(label2);
-		// Only add if edge does not already exist
-		if (!hasEdge(label1, label2)) {
-			Vertex<T> v1 = new Vertex<T>(label1);
-			Vertex<T> v2 = new Vertex<T>(label2);
-			adjVertices.get(v1).add(v2);
-			adjVertices.get(v2).add(v1);
-			this.weightStrategy.addEdge(label1, label2);
-			this.weightStrategy.addEdge(label2, label1,this.getWeight(label1, label2));
+		addVertex(vertex1);
+		addVertex(vertex2);
+		// Only add if edge does not already exists
+		//double-check it
+		if (!hasEdge(vertex1, vertex2) && !hasEdge(vertex2, vertex1) && !vertex1.equals(vertex2)) {
+			adjVertices.get(vertex1).add(vertex2);
+			adjVertices.get(vertex2).add(vertex1);
+			this.weightStrategy.addEdge(vertex1, vertex2);
+			//this.weightStrategy.addEdge(vertex2, vertex1, this.getWeight(vertex1, vertex2));
 		}
 	}
 
 	@Override
-	public void removeEdge(T label1, T label2) {
-		Vertex<T> v1 = new Vertex<T>(label1);
-		Vertex<T> v2 = new Vertex<T>(label2);
-		List<Vertex<T>> eV1 = adjVertices.get(v1);
-		List<Vertex<T>> eV2 = adjVertices.get(v2);
+	public void removeEdge(Vertex<T> vertex1, Vertex<T> vertex2) {
+		List<Vertex<T>> eV1 = adjVertices.get(vertex1);
+		List<Vertex<T>> eV2 = adjVertices.get(vertex2);
 		if(eV1 != null)
-			eV1.remove(v2);
+			eV1.remove(vertex2);
 		if(eV2 != null)
-			eV2.remove(v1);
+			eV2.remove(vertex1);
 	}
 	
 }

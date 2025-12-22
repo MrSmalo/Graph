@@ -1,4 +1,4 @@
-package factory;
+package vertex.factory;
 
 import vertex.Vertex;
 

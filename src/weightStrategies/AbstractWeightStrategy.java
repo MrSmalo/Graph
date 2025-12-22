@@ -1,5 +1,7 @@
 package weightStrategies;
 
+import vertex.Vertex;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,16 +17,17 @@ public abstract class AbstractWeightStrategy<T> implements WeightStrategy<T> {
 	 * Default constructor initializing the weight table.
 	 */
 	public AbstractWeightStrategy() {
-		weightTable = new HashMap<>();
+		super();
+		this.weightTable = new HashMap<>();
 	}
 	
 	@Override
 	/**
 	 * Generates a unique key for the edge based on vertex labels.
 	 */
-	public String getKey(T label1,T label2) {
-		String v1 = label1.toString();
-		String v2 = label2.toString();
+	public String getKey(Vertex<T> vertex1, Vertex<T> vertex2) {
+		String v1 = vertex1.getLabel().toString();
+		String v2 = vertex2.getLabel().toString();
 		return v1 + "," + v2;
 	}
 
@@ -32,11 +35,17 @@ public abstract class AbstractWeightStrategy<T> implements WeightStrategy<T> {
 	/**
 	 * Gets the weight of the edge between two vertices.
 	 */
-	public Integer getWeight(T label1, T label2) {
-		if (!weightTable.containsKey(getKey(label1,label2))) {
+	public Integer getWeight(Vertex<T> vertex1, Vertex<T> vertex2) {
+		String key = getKey(vertex1, vertex2);
+		if (!weightTable.containsKey(key)) {
 			return null;
 		}
-		return weightTable.get(getKey(label1,label2));
+		return weightTable.get(key);
+	}
+
+	@Override
+	public void printWeights(){
+		weightTable.forEach((k,v) -> System.out.println(k + " : " + v));
 	}
 
 }
